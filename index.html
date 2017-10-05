@@ -1,0 +1,123 @@
+<html lang="en">
+<head></head>
+<style>
+body {
+  background: #000;
+  margin: 0;
+}
+#animation {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  background: #000;
+  width: 100%;
+  height: 100%;
+}
+#controls {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 32px 32px 0 0;
+  width: 300px;
+  height: 600px;
+  border: 1px solid blue;
+  background: rgba(0, 0, 255, 0.3);
+  color: blue;
+  font-weight: bold;
+  font-size: 1.4em;
+  line-height: 1.6em;
+}
+#controls > div {
+  padding: 20px;
+}
+#types {
+  height: 2em;
+  width: 100%;
+  font-size: 1em;
+  padding-left: 10px;
+  margin-bottom: 12px;
+}
+.valText {
+  display: inline-block;
+  width: 50px;
+  text-align: right;
+  margin-right: 12px;
+}
+.break {
+  border-top: 1px solid blue;
+  margin: 12px 0;
+}
+.twoLine input {
+  display: block;
+  width: 100%;
+}
+.voltageControl {
+  display: flex;
+  flex-direction: column;
+}
+.voltageControl > div {
+  display: flex;
+}
+.voltageControl > div > input {
+  flex-grow: 2;
+  font-size: 24px;
+  width: 33%;
+  text-align: center;
+}
+.voltageControl > div > input[type="checkbox"] {
+  flex-grow: 1;
+  height: 1em;
+}
+#resetButton {
+  font-size: 1em;
+  float: right;
+}
+</style>
+
+<body onload="load()">
+  <canvas id="animation"></canvas>
+  <div id="controls">
+  <div>
+    <select id="types" onchange="selectType(event)">
+      <option selected>RS</option>
+      <option>IB</option>
+      <option>CH</option>
+      <option>FS</option>
+      <option>TC</option>
+      <option>RZ</option>
+      <option>LTC</option>
+      <option>Chaotic</option>
+    </select>
+    <div>
+      A: <span id='valAText' class='valText'></span><input id='valA' type="range" min='0.02' max='0.1' step='0.01' onchange="changeSlider(event)" />
+    </div>
+    <div>
+      B: <span id='valBText' class='valText'></span><input id='valB' type="range" min='0.2' max='0.25' step='0.01' onchange="changeSlider(event)" />
+    </div>
+    <div>
+      C: <span id='valCText' class='valText'></span><input id='valC' type="range" min='-65' max='-50' step='1' onchange="changeSlider(event)" />
+    </div>
+    <div>
+      D: <span id='valDText' class='valText'></span><input id='valD' type="range" min='0.05' max='8' step='0.05' onchange="changeSlider(event)" />
+    </div>
+    <div class="break"></div>
+    <div class="twoLine">
+      Speed: <span id='valDTText' class='valText'></span><input id='valDT' type="range" min='0.01' max='0.5' step='0.01' onchange="changeSlider(event)" />
+    </div>
+    <div class='voltageControl'>
+      <span>Voltage:</span>
+      <div>
+        <input id='valVLow' type="text" onchange="changeSlider(event)"></input>
+        <input id='valAddV' type="checkbox" onchange="changeSlider(event)"></input>
+        <input id='valVHigh' type="text" onchange="changeSlider(event)"></input>
+      </div>
+    </div>
+    <div class="break"></div>
+    <button id="resetButton" onclick="resetDots()">Reset dots</button>
+  </div>
+  </div>
+  <script src="d3.v3.min.js"></script>
+  <script src="flow_anim.js"></script>
+</body>
+
+</html>
